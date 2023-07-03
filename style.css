@@ -1,0 +1,275 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f1f1f1;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  padding: 20px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.game-container.dark-mode {
+  background-color: #282828;
+}
+.game-container #playerGreetMsg{
+  position: absolute;
+  font-size: 13px;
+  font-weight: 600;
+  top: 6px;
+  left: 8px;
+}
+.game-container #playerHIScore{
+  position: absolute;
+  font-size: 13px;
+  font-weight: 600;
+  top: 6px;
+  right: 8px;
+}
+.game-board {
+  position: relative;
+  background-color: #ddd;
+  border: 2px solid #777;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+.game-board.dark-mode {
+  background-color: #282828;
+  border-color: #5e43f3;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+}
+.button {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50%;
+  background-color: #9171f8;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.button:disabled {
+  background-color: #a688fa;
+  color: #575757;
+  cursor: not-allowed;
+}
+
+.button.dark-mode {
+  background-color: #7a5af5;
+  color: #fff;
+}
+.button.dark-mode:disabled{
+    background-color: #ba9ffb;
+    color: #908d96;
+}
+.score {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  transition: color background-color 0.3s ease;
+}
+.score.dark-mode {
+  color: #fff;
+  background: #282828;
+}
+
+.snake {
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  position: absolute;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.snake:nth-child(1) {
+  background-color: yellowgreen;
+}
+
+.food {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameOverDialog {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 18px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  min-width: 200px;
+  position: relative;
+}
+#gameOverDialog.dark-mode{
+  background-color: #282828;
+  color: #8b8b8b;
+}
+#gameOverDialog::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#gameOverDialog.dark-mode::backdrop{
+  background-color: rgba(250, 250, 250, 0.137);
+}
+#gameOverDialog h2{
+  text-align: center;
+}
+#gameOverDialog button{
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7a5af5;
+  color: #fff;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+#gameOverDialog button svg{
+  height: 22px;
+  width: 22px;
+}
+
+#askNameDialog {
+  border: none;
+  padding: 20px 20px;
+  border-radius: 18px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  min-width: 200px;
+}
+#askNameDialog.dark-mode{
+  background-color: #282828;
+  color: #8b8b8b;
+}
+#askNameDialog::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#askNameDialog.dark-mode::backdrop{
+  background-color: rgba(250, 250, 250, 0.137);
+}
+#askNameDialog form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+}
+#askNameDialog form input{
+  border: none;
+  background: transparent;
+  outline: none;
+  border-bottom: 2px solid gray;
+  margin-bottom: 12px;
+  transition: all 0.4s ease-in-out;
+  font-size: 15px;
+  color: gray;
+}
+#askNameDialog form input.dark-mode{
+  border-bottom: 2px solid #8b8b8b;
+  color: #8b8b8b;
+}
+#askNameDialog form input:focus {
+  border-bottom: 2px solid #7a5af5;
+}
+#askNameDialog form button{
+  border: none;
+  outline: none;
+  background: #7a5af5;
+  padding: 10px;
+  border-radius: 12px;
+  color: #fff;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+#askNameDialog form button:active{
+  background: #a590f7;
+}
+
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.mode-toggle-label {
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.mode-toggle.dark-mode-label {
+  color: #fff;
+}
+
+.dark-mode-checkbox:checked ~ .mode-toggle-label {
+  color: #fff;
+}
+.dark-mode {
+  background-color: #121212;
+  color: #8b8b8b;
+}
+
+#footer-txt{
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@keyframes normal_glowing {
+  0% {
+    box-shadow: 0 0 8px #00aaff;
+  }
+  50% {
+    box-shadow: 0 0 25px #00aaff;
+  }
+  100% {
+    box-shadow: 0 0 8px #00aaff;
+  }
+}
+
+@keyframes redish_glowing {
+  0% {
+    box-shadow: 0 0 8px #ff0000;
+  }
+  50% {
+    box-shadow: 0 0 25px #ff0000;
+  }
+  100% {
+    box-shadow: 0 0 8px #ff0000;
+  }
+}
